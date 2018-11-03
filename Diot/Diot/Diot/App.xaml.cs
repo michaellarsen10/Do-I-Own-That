@@ -50,7 +50,13 @@ namespace Diot
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+
+            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+             *           Please keep in alphabetical order             *
+             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<Page1, Page1ViewModel>();
+            containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
         }
 
         #endregion
