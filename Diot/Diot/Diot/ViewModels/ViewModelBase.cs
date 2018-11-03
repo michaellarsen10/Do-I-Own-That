@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Diot.Interface;
+using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace Diot.ViewModels
@@ -13,7 +14,7 @@ namespace Diot.ViewModels
 
         #region Properties
 
-        protected INavigationService NavigationService { get; }
+        public IExtendedNavigation NavigationService { get; }
 
         public string Title
         {
@@ -27,7 +28,7 @@ namespace Diot.ViewModels
 
         #region Constructors
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(IExtendedNavigation navigationService)
         {
             NavigationService = navigationService;
         }

@@ -3,8 +3,11 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:views="clr-namespace:Diot.Views;assembly=Diot"
-            x:Class="Diot.Views.MainPage"
-            Title="{Binding Title}">
+            x:Class="Diot.Views.MainPage">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Add New" Command="{Binding NavigateToAddNewPageCommand}"/>
+    </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>
 

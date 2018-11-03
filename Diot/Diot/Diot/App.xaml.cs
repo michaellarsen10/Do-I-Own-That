@@ -1,4 +1,6 @@
-﻿using Diot.ViewModels;
+﻿using Diot.Interface;
+using Diot.Services;
+using Diot.ViewModels;
 using Diot.Views;
 using Prism;
 using Prism.Ioc;
@@ -49,14 +51,20 @@ namespace Diot
         /// </summary>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
+            #region Navigation
 
-            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-             *           Please keep in alphabetical order             *
-             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+            containerRegistry.Register<IExtendedNavigation, ExtendedNavigation>();
+
+            #endregion
+
+            #region Pages
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<AddNewPage, AddNewPageViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<Page1, Page1ViewModel>();
             containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
+
+            #endregion
         }
 
         #endregion
