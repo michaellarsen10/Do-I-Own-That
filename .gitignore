@@ -8,3 +8,9 @@
 /Diot/Diot/Diot.Android/obj/Debug
 /Diot/Diot/Diot.Android/obj
 /Diot/Diot/Diot.iOS/obj/iPhone/Debug
+/Diot/.vs/Diot/DesignTimeBuild/.dtbcache
+/Diot/Diot/Diot/bin/Debug/netstandard2.0
+/Diot/Diot/Diot.Android/bin/Debug
+/Diot/Diot/Diot.iOS/bin/iPhoneSimulator/Debug
+/Diot/Diot/Diot.iOS/obj/iPhoneSimulator/Debug
+*.user
