@@ -1,12 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Diot.Views.MainPage"
-             Title="{Binding Title}">
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:views="clr-namespace:Diot.Views;assembly=Diot"
+            x:Class="Diot.Views.MainPage"
+            Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <TabbedPage.Children>
 
-</ContentPage>
+        <!--#region Page 1-->
+
+        <views:Page1 Title="Page 1">
+            <views:Page1.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="page1icon.png"/>
+                </OnPlatform>
+            </views:Page1.Icon>
+        </views:Page1>
+
+        <!--#endregion-->
+
+        <!--#region Page 2-->
+
+        <views:Page2 Title="Page 2">
+            <views:Page2.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="page2icon.png"/>
+                </OnPlatform>
+            </views:Page2.Icon>
+        </views:Page2>
+
+        <!--#endregion-->
+
+    </TabbedPage.Children>
+
+</TabbedPage>
