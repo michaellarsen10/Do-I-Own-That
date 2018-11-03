@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Diot/.vs/Diot/v15
+/Diot/Diot/Diot/obj/Debug/netstandard2.0
+/Diot/Diot/Diot/obj
+/Diot/Diot/Diot.Android/obj/Debug
+/Diot/Diot/Diot.Android/obj
+/Diot/Diot/Diot.iOS/obj/iPhone/Debug
