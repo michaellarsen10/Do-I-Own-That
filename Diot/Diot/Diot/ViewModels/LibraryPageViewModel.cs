@@ -1,19 +1,18 @@
 ﻿using Diot.Interface;
-using Prism.Navigation;
 
 namespace Diot.ViewModels
 {
-    public class Page2ViewModel : ViewModelBase
+    public class LibraryPageViewModel : ViewModelBase
     {
         #region Methods
 
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Page2ViewModel"/> class.
+        ///     Initializes a new instance of the <see cref="LibraryPageViewModel" /> class.
         /// </summary>
         /// <param name="navigationService">The navigation service.</param>
-        public Page2ViewModel(IExtendedNavigation navigationService) : base(navigationService)
+        public LibraryPageViewModel(IExtendedNavigation navigationService) : base(navigationService)
         {
         }
 

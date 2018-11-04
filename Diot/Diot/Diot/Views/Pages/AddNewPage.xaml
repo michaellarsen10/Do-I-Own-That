@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Diot.Views.AddNewPage"
-             Title="{Binding Title}">
+             xmlns:extensions="clr-namespace:Diot.Views.Extensions;assembly=Diot"
+             x:Class="Diot.Views.Pages.AddNewPage"
+             Title="{extensions:Translate AddNew}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="We'll add some new stuff here."
+            <Label Text="{extensions:Translate AddNew}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

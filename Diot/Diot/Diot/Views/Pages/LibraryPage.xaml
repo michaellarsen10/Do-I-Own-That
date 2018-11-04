@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:Diot.Views.Extensions;assembly=Diot"
+             x:Class="Diot.Views.Pages.LibraryPage"
+             BackgroundColor="Orange">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{extensions:Translate Library}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
