@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Diot.Helpers;
 using Diot.Interface;
+using Prism.Services;
 using Xamarin.Forms;
 
 namespace Diot.ViewModels
@@ -24,8 +25,8 @@ namespace Diot.ViewModels
         /// <summary>
         ///     Initializes a new instance of the <see cref="MainPageViewModel" /> class.
         /// </summary>
-        public MainPageViewModel(IExtendedNavigation navigationService)
-            : base(navigationService)
+        public MainPageViewModel(IExtendedNavigation navigationService, IPageDialogService dialogService)
+            : base(navigationService, dialogService)
         {
             Title = "Main Page";
         }

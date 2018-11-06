@@ -1,7 +1,9 @@
-﻿using Diot.Interface;
+﻿using System;
+using Diot.Interface;
 using Diot.Services;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 
 namespace Diot.ViewModels
 {
@@ -18,6 +20,7 @@ namespace Diot.ViewModels
         #region Properties
 
         public IExtendedNavigation NavigationService { get; }
+        public IPageDialogService DialogService { get; }
 
         public string Title
         {
@@ -36,25 +39,47 @@ namespace Diot.ViewModels
 
         #region Constructors
 
-        public ViewModelBase(IExtendedNavigation navigationService)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ViewModelBase"/> class.
+        /// </summary>
+        /// <param name="navigationService">The navigation service.</param>
+        /// <param name="dialogService">The dialog service.</param>
+        public ViewModelBase(IExtendedNavigation navigationService,
+            IPageDialogService dialogService)
         {
             NavigationService = navigationService;
-        }
+            DialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));}
+
 
         #endregion
 
+        /// <summary>
+        ///     Destroys this instance.
+        /// </summary>
         public virtual void Destroy()
         {
         }
 
+        /// <summary>
+        ///     Called when [navigated from].
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
 
+        /// <summary>
+        ///     Called when [navigated to].
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
         }
 
+        /// <summary>
+        ///     Called when [navigating to].
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
         public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
         }

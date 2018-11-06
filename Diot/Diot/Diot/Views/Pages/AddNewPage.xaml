@@ -6,9 +6,8 @@
              Title="{extensions:Translate AddNew}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{extensions:Translate AddNew}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button Text="{Binding ButtonText}" Command="{Binding AddNewMovieCommand}"/>
+            <Button Text="Delete Everything" Command="{Binding DeleteAllMoviesCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

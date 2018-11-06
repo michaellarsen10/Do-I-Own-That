@@ -7,6 +7,9 @@
 /Diot/Diot/Diot/obj/*
 /Diot/Diot/Diot.Android/obj/*
 /Diot/Diot/Diot.iOS/obj/*
+/Diot/Diot/Diot.iOS/obj/Diot.iOS.csproj.nuget.cache
+/Diot/Diot/Diot.iOS/obj/Diot.iOS.csproj.nuget.g.props
+/Diot/Diot/Diot.iOS/obj/project.assets.json
 /Diot/.vs/Diot/DesignTimeBuild/.dtbcache
 /Diot/Diot/Diot/bin/Debug/netstandard2.0/*
 /Diot/Diot/Diot.Android/bin/Debug/*
