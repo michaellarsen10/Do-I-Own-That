@@ -1,4 +1,5 @@
 ﻿using Diot.Interface;
+using Diot.Services;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -7,6 +8,8 @@ namespace Diot.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         #region  Fields
+
+        private static DatabaseService databaseService;
 
         private string _title;
 
@@ -21,6 +24,11 @@ namespace Diot.ViewModels
             get => _title;
             set => SetProperty(ref _title, value);
         }
+
+        /// <summary>
+        ///     Gets the database service.
+        /// </summary>
+        public static DatabaseService DbService => databaseService ?? (databaseService = new DatabaseService());
 
         #endregion
 

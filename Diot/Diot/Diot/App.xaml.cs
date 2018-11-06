@@ -1,7 +1,8 @@
 ﻿using Diot.Interface;
 using Diot.Services;
 using Diot.ViewModels;
-using Diot.Views;
+using Diot.Views.Extensions;
+using Diot.Views.Pages;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
@@ -43,6 +44,9 @@ namespace Diot
         {
             InitializeComponent();
 
+            ResourceManager.Init(Container.Resolve<IResourceManager>());
+            TranslateExtension.Init(new ResourceManager());
+
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
@@ -57,12 +61,19 @@ namespace Diot
 
             #endregion
 
+            #region Interfaces
+
+            containerRegistry.Register<IResourceManager, ResourceManager>();
+
+            #endregion
+
             #region Pages
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<AddNewPage, AddNewPageViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<Page1, Page1ViewModel>();
-            containerRegistry.RegisterForNavigation<Page2, Page2ViewModel>();
+            containerRegistry.RegisterForNavigation<LibraryPage, LibraryPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
 
             #endregion
         }

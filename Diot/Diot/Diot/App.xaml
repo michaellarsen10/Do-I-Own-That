@@ -6,7 +6,7 @@
                         x:Class="Diot.App">
     <Application.Resources>
 
-        <!-- Application resource dictionary -->
+        <x:String x:Key="DbName">library.db3</x:String>
 
     </Application.Resources>
 </prism:PrismApplication>
