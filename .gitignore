@@ -12,5 +12,8 @@
 /Diot/Diot/Diot/bin/Debug/netstandard2.0
 /Diot/Diot/Diot.Android/bin/Debug
 /Diot/Diot/Diot.iOS/bin/iPhoneSimulator/Debug
-/Diot/Diot/Diot.iOS/obj/iPhoneSimulator/Debug
+/Diot/Diot/Diot.iOS/obj
 *.user
+*.cache
+*.prop
+*.assets.json
