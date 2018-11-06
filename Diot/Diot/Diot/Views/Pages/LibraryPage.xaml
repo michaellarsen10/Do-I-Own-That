@@ -7,9 +7,18 @@
              BackgroundColor="Orange">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{extensions:Translate Library}"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Button Text="{Binding ButtonText}" Command="{Binding AddNewMovieCommand}"/>
+            <Button Text="Delete Everything" Command="{Binding DeleteAllMoviesCommand}"/>
+
+            <ListView ItemsSource="{Binding MoviesList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Title}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
