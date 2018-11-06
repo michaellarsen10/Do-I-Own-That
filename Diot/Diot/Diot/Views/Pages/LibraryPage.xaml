@@ -2,19 +2,20 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:extensions="clr-namespace:Diot.Views.Extensions;assembly=Diot"
              x:Class="Diot.Views.Pages.LibraryPage"
              BackgroundColor="Orange">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="{Binding ButtonText}" Command="{Binding AddNewMovieCommand}"/>
-            <Button Text="Delete Everything" Command="{Binding DeleteAllMoviesCommand}"/>
-
             <ListView ItemsSource="{Binding MoviesList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding Title}"/>
+                            <StackLayout Spacing="-6">
+                                <Label Text="{Binding Title}"/>
+                                <Label Margin="15"
+                                       FontSize="10" 
+                                       Text="{Binding OtherComment}"/>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

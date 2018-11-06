@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Input;
 using Diot.Interface;
 using Diot.Models;
 using Prism.Navigation;
-using Xamarin.Forms;
+using Prism.Services;
 
 namespace Diot.ViewModels
 {
@@ -17,14 +16,9 @@ namespace Diot.ViewModels
 
         #region Properties
 
-        public ICommand AddNewMovieCommand => new Command(addNewMovie);
-        public ICommand DeleteAllMoviesCommand => new Command(deleteAllMovies);
-
-        private void deleteAllMovies()
-        {
-            MoviesList = DbService.DeleteAllMovies();
-        }
-
+        /// <summary>
+        ///     Gets or sets the movies list.
+        /// </summary>
         public List<MovieModel> MoviesList
         {
             get => _moviesList;
@@ -41,25 +35,22 @@ namespace Diot.ViewModels
         ///     Initializes a new instance of the <see cref="LibraryPageViewModel" /> class.
         /// </summary>
         /// <param name="navigationService">The navigation service.</param>
-        public LibraryPageViewModel(IExtendedNavigation navigationService) : base(navigationService)
+        /// <param name="dialogService">The dialog service.</param>
+        public LibraryPageViewModel(IExtendedNavigation navigationService, 
+            IPageDialogService dialogService) : base(navigationService, dialogService)
         {
         }
 
         #endregion
 
-        private void addNewMovie()
-        {
-            DbService.SaveMovie(new MovieModel {Title = $"Movie {MoviesList.Count + 1}"});
-            MoviesList = DbService.GetAllMovies();
-        }
-
+        /// <summary>
+        ///     Called when [navigating to].
+        /// </summary>
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
             MoviesList = DbService.GetAllMovies();
         }
-
-        public string ButtonText => "This is button text";
 
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using Diot.Interface;
+using Prism.Services;
 
 namespace Diot.ViewModels
 {
@@ -12,7 +13,9 @@ namespace Diot.ViewModels
         ///     Initializes a new instance of the <see cref="SettingsPageViewModel" /> class.
         /// </summary>
         /// <param name="navigationService">The navigation service.</param>
-        public SettingsPageViewModel(IExtendedNavigation navigationService) : base(navigationService)
+        /// <param name="dialogService">The dialog service.</param>
+        public SettingsPageViewModel(IExtendedNavigation navigationService, IPageDialogService dialogService) 
+            : base(navigationService, dialogService)
         {
         }
 
