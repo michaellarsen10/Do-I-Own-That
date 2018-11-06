@@ -2,17 +2,15 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Diot/.vs/Diot/v15
-/Diot/Diot/Diot/obj/Debug/netstandard2.0
-/Diot/Diot/Diot/obj
-/Diot/Diot/Diot.Android/obj/Debug
-/Diot/Diot/Diot.Android/obj
-/Diot/Diot/Diot.iOS/obj/iPhone/Debug
+/Diot/.vs/Diot/v15/*
+/Diot/Diot/Diot/obj/Debug/netstandard2.0/*
+/Diot/Diot/Diot/obj/*
+/Diot/Diot/Diot.Android/obj/*
+/Diot/Diot/Diot.iOS/obj/*
 /Diot/.vs/Diot/DesignTimeBuild/.dtbcache
-/Diot/Diot/Diot/bin/Debug/netstandard2.0
-/Diot/Diot/Diot.Android/bin/Debug
-/Diot/Diot/Diot.iOS/bin/iPhoneSimulator/Debug
-/Diot/Diot/Diot.iOS/obj
+/Diot/Diot/Diot/bin/Debug/netstandard2.0/*
+/Diot/Diot/Diot.Android/bin/Debug/*
+/Diot/Diot/Diot.iOS/bin/iPhoneSimulator/Debug/*
 *.user
 *.cache
 *.prop
