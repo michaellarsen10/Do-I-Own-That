@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Diot.Interface;
 using Diot.Models;
 using Prism.Navigation;
@@ -10,7 +11,7 @@ namespace Diot.ViewModels
     {
         #region  Fields
 
-        private List<MovieModel> _moviesList = new List<MovieModel>();
+        private List<MovieDbModel> _moviesList = new List<MovieDbModel>();
 
         #endregion
 
@@ -19,7 +20,7 @@ namespace Diot.ViewModels
         /// <summary>
         ///     Gets or sets the movies list.
         /// </summary>
-        public List<MovieModel> MoviesList
+        public List<MovieDbModel> MoviesList
         {
             get => _moviesList;
             set => SetProperty(ref _moviesList, value);
@@ -49,7 +50,7 @@ namespace Diot.ViewModels
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            MoviesList = DbService.GetAllMovies();
+            MoviesList = DbService.GetAllMovies().OrderBy(x => x.Title).ToList();
         }
 
         #endregion
