@@ -12,7 +12,6 @@ namespace Diot.ViewModels
         #region  Fields
 
         private static DatabaseService databaseService;
-
         private string _title;
 
         #endregion
@@ -48,8 +47,8 @@ namespace Diot.ViewModels
             IPageDialogService dialogService)
         {
             NavigationService = navigationService;
-            DialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));}
-
+            DialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+        }
 
         #endregion
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Diot.Interface;
 using Diot.Models;
 using SQLite;
@@ -31,7 +33,7 @@ namespace Diot.Services
             {
                 try
                 {
-                    conn.CreateTable<MovieModel>();
+                    conn.CreateTable<MovieDbModel>();
                 }
                 catch (Exception e)
                 {
@@ -43,13 +45,13 @@ namespace Diot.Services
         #endregion
 
         /// <summary>
-        ///     Gets all movies.
+        ///     Gets all movies and returns sorted list.
         /// </summary>
-        public List<MovieModel> GetAllMovies()
+        public List<MovieDbModel> GetAllMovies()
         {
             lock (locker)
             {
-                return conn.Table<MovieModel>().ToList();
+                return conn?.Table<MovieDbModel>()?.ToList()?.OrderBy(x => x.Title)?.ToList();
             }
         }
 
@@ -57,11 +59,23 @@ namespace Diot.Services
         ///     Saves (updates or inserts) a movie.
         /// </summary>
         /// <param name="movie">The movie.</param>
-        public int SaveMovie(MovieModel movie)
+        public int SaveMovie(MovieDbModel movie)
         {
             lock (locker)
             {
-                if (movie.Id == 0)
+                var movieExists = false;
+
+                try
+                {
+                    var query = $"SELECT * FROM Movies WHERE id={movie.Id};";
+                    movieExists = conn.FindWithQuery<MovieDbModel>(query) != null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error : " + ex.Message);
+                }
+
+                if (!movieExists)
                 {
                     return conn.Insert(movie);
                 }
@@ -86,13 +100,13 @@ namespace Diot.Services
         /// <summary>
         ///     Deletes all movies.
         /// </summary>
-        public List<MovieModel> DeleteAllMovies()
+        public List<MovieDbModel> DeleteAllMovies()
         {
             lock (locker)
             {
-                conn.DropTable<MovieModel>();
-                conn.CreateTable<MovieModel>();
-                return conn.Table<MovieModel>().ToList();
+                conn.DropTable<MovieDbModel>();
+                conn.CreateTable<MovieDbModel>();
+                return conn.Table<MovieDbModel>().ToList();
             }
         }
 

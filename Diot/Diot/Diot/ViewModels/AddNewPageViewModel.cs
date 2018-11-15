@@ -1,5 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Diot.Helpers;
 using Diot.Interface;
 using Diot.Models;
 using Prism.Services;
@@ -9,17 +13,70 @@ namespace Diot.ViewModels
 {
     public class AddNewPageViewModel : ViewModelBase
     {
+        #region  Fields
+
+        private ImageSource _coverImage;
+
+        private MovieDbModel _currentResult;
+        private int _currentResultIndex = -1;
+        private string _movieTitle;
+        private string _overview;
+        private MovieDbResultsModel _searchResults;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         ///     Gets the add new movie command.
         /// </summary>
-        public ICommand AddNewMovieCommand => new Command(addNewMovie);
+        public ICommand AddNewMovieCommand => new Command(async () => { await addNewMovie(); });
 
         /// <summary>
-        ///     Gets the delete all movies command.
+        ///     Gets the search movie command.
         /// </summary>
-        public ICommand DeleteAllMoviesCommand => new Command(async () => { await deleteAllMovies(); });
+        public ICommand SearchMovieCommand => new Command(async () => { await searchMovie(); });
+
+        /// <summary>
+        ///     Gets the next result command.
+        /// </summary>
+        public ICommand NextResultCommand => new Command(async () => { await loadNextResult(); });
+
+        /// <summary>
+        ///     Gets or sets the movie title.
+        /// </summary>
+        public string MovieTitle
+        {
+            get => _movieTitle;
+            set => SetProperty(ref _movieTitle, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the cover image.
+        /// </summary>
+        public ImageSource CoverImage
+        {
+            get => _coverImage;
+            set => SetProperty(ref _coverImage, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the current result.
+        /// </summary>
+        public MovieDbModel CurrentResult
+        {
+            get => _currentResult;
+            set => SetProperty(ref _currentResult, value, async () => { await populateViewModel(); });
+        }
+
+        /// <summary>
+        ///     Gets or sets the current result overview text.
+        /// </summary>
+        public string Overview
+        {
+            get => _overview;
+            set => SetProperty(ref _overview, value);
+        }
 
         #endregion
 
@@ -40,32 +97,77 @@ namespace Diot.ViewModels
         #endregion
 
         /// <summary>
-        ///  Deletes all movies.
+        ///     Loads the next result.
         /// </summary>
-        private async Task deleteAllMovies()
+        private async Task loadNextResult()
         {
-            await DialogService.DisplayAlertAsync("Delete all movies",
-                "Are you sure you want to delete all movies?",
-                "Ok");
+            if (_searchResults?.Results == null || !_searchResults.Results.Any() ||
+                _currentResultIndex + 1 >= _searchResults.Results.Count())
+            {
+                await DialogService.DisplayAlertAsync("End of results",
+                    "There are no other search results found. Try again.", "Ok");
+                return;
+            }
 
-            DbService.DeleteAllMovies();
+            CurrentResult = _searchResults.Results[++_currentResultIndex];
+        }
+
+        /// <summary>
+        ///     Searches for the current movie title.
+        /// </summary>
+        private async Task searchMovie()
+        {
+            var results = await MoviesDbHelper.SearchMovie(MovieTitle);
+
+            if (results?.Results != null && results.Results.Any())
+            {
+                _searchResults = results;
+                CurrentResult = results.Results[0];
+                _currentResultIndex = 0;
+            }
+            else
+            {
+                await DialogService.DisplayAlertAsync("No search results",
+                    $"No results found for \"{MovieTitle}\" found.", "Ok");
+            }
+
+            MovieTitle = string.Empty;
+        }
+
+        /// <summary>
+        ///     Populates the view model.
+        /// </summary>
+        private async Task populateViewModel()
+        {
+            Overview = CurrentResult.Overview;
+
+            var imgSrc = await MoviesDbHelper.GetMovieCover(_currentResult.Poster_Path, 400);
+
+            if (imgSrc == null)
+            {
+                Debug.WriteLine("No cover image found.");
+                CoverImage = null;
+            }
+            else
+            {
+                CoverImage = ImageSource.FromStream(() => new MemoryStream(imgSrc));
+            };
         }
 
         /// <summary>
         ///     Adds the new movie.
         /// </summary>
-        private void addNewMovie()
+        private async Task addNewMovie()
         {
-            var moviesList = DbService.GetAllMovies();
-            var title = $"Movie {moviesList.Count + 1}";
-
-            DbService.SaveMovie(new MovieModel
+            if (CurrentResult == null)
             {
-                Title = title,
-                OtherComment = $"This is another comment for {title}"
-            });
+                await DialogService.DisplayAlertAsync("Enter movie title", "Please search a movie title to add.", "Ok");
+                return;
+            }
 
-            NavigationService.GoBackAsync();
+            DbService.SaveMovie(CurrentResult);
+
+            await NavigationService.GoBackAsync();
         }
 
         #endregion
