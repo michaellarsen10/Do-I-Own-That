@@ -17,6 +17,9 @@ namespace Diot.Services
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HttpClientService" /> class.
+        /// </summary>
         public HttpClientService()
         {
             client = new HttpClient {MaxResponseContentBufferSize = 256000};
@@ -25,17 +28,26 @@ namespace Diot.Services
 
         #endregion
 
+        /// <summary>
+        ///     Gets the jObject asynchronous.
+        /// </summary>
         public async Task<JObject> GetJObjectAsync(string url)
         {
             var results = await client.GetStringAsync(url);
             return JObject.Parse(results);
         }
 
+        /// <summary>
+        ///     Gets the image byte array asynchronous.
+        /// </summary>
         public async Task<byte[]> GetImageByteArrayAsync(string url)
         {
             return await client.GetByteArrayAsync(url);
         }
 
+        /// <summary>
+        ///     Gets the json string asynchronous.
+        /// </summary>
         public async Task<string> GetStringAsync(string url)
         {
             return await client.GetStringAsync(url);

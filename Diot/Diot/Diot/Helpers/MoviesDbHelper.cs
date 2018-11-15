@@ -1,10 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Diot.Models;
 using Diot.Services;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Diot.Helpers
 {
@@ -37,8 +35,11 @@ namespace Diot.Helpers
             return retVal;
         }
 
-        #endregion
-
+        /// <summary>
+        ///     Gets the movie cover.
+        /// </summary>
+        /// <param name="posterPath">The poster path.</param>
+        /// <param name="size">The size.</param>
         public static async Task<byte[]> GetMovieCover(string posterPath, int size)
         {
             if (string.IsNullOrWhiteSpace(posterPath))
@@ -47,7 +48,10 @@ namespace Diot.Helpers
                 return null;
             }
 
-            return await new HttpClientService().GetImageByteArrayAsync(MoviesDbApiUrls.GetMoviePosterRequestUrl(posterPath, size));
+            return await new HttpClientService().GetImageByteArrayAsync(
+                MoviesDbApiUrls.GetMoviePosterRequestUrl(posterPath, size));
         }
+
+        #endregion
     }
 }

@@ -1,18 +1,25 @@
 ﻿using System.Collections.Generic;
 using SQLite;
+using Xamarin.Forms;
 
 namespace Diot.Models
 {
     [Table("Movies")]
     public class MovieDbModel
     {
+        #region Fields
+
+        private ImageSource _coverImage = "library_icon.png";
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         ///     Gets or sets the vote count.
         /// </summary>
         public int Vote_Count { get; set; }
-        
+
         /// <summary>
         ///     Gets or sets the identifier.
         /// </summary>
@@ -45,6 +52,16 @@ namespace Diot.Models
         public string Poster_Path { get; set; }
 
         /// <summary>
+        ///     Gets or sets the cover image.
+        /// </summary>
+        [Ignore]
+        public ImageSource CoverImage
+        {
+            get => _coverImage;
+            set => _coverImage = value;
+        }
+
+        /// <summary>
         ///     Gets or sets the original language.
         /// </summary>
         public string Original_Language { get; set; }
@@ -57,7 +74,8 @@ namespace Diot.Models
         /// <summary>
         ///     Gets or sets the genre ids.
         /// </summary>
-        //public List<int> Genre_Ids { get; set; }
+        [Ignore]
+        public List<int> Genre_Ids { get; set; }
 
         /// <summary>
         ///     Gets or sets the backdrop path.

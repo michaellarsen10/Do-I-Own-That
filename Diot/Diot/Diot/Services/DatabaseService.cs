@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Diot.Interface;
 using Diot.Models;
 using SQLite;
@@ -43,13 +45,13 @@ namespace Diot.Services
         #endregion
 
         /// <summary>
-        ///     Gets all movies.
+        ///     Gets all movies and returns sorted list.
         /// </summary>
         public List<MovieDbModel> GetAllMovies()
         {
             lock (locker)
             {
-                return conn.Table<MovieDbModel>().ToList();
+                return conn?.Table<MovieDbModel>()?.ToList()?.OrderBy(x => x.Title)?.ToList();
             }
         }
 

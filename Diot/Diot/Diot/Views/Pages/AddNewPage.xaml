@@ -25,14 +25,14 @@
                          Grid.ColumnSpan="2"
                          Orientation="Horizontal">
                 <Entry Text="{Binding MovieTitle, Mode=TwoWay}"
-                       Placeholder="Movie Title" 
-                       HorizontalOptions="FillAndExpand"/>
+                       Placeholder="Movie Title"
+                       HorizontalOptions="FillAndExpand" />
                 <Button Text="Search"
                         Command="{Binding SearchMovieCommand}"
-                        WidthRequest="100"/>
+                        WidthRequest="100" />
             </StackLayout>
 
-            <Image Source="{Binding Image}"
+            <Image Source="{Binding CoverImage}"
                    Grid.Row="1"
                    Grid.Column="0"
                    Grid.ColumnSpan="2" />
@@ -45,8 +45,8 @@
 
             <Button Text="Add that one"
                     Grid.Row="3"
-                    Grid.Column="0" 
-                    Command="{Binding AddNewMovieCommand}"/>
+                    Grid.Column="0"
+                    Command="{Binding AddNewMovieCommand}" />
             <Button Text="Try again"
                     Command="{Binding NextResultCommand}"
                     Grid.Row="3"

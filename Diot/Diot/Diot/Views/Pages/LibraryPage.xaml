@@ -2,24 +2,18 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Diot.Views.Pages.LibraryPage"
-             BackgroundColor="Orange">
+             x:Class="Diot.Views.Pages.LibraryPage">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
             <ListView ItemsSource="{Binding MoviesList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Spacing="-6">
-                                <Label Text="{Binding Title}"/>
-                                <Label Margin="15"
-                                       FontSize="10" 
-                                       Text="{Binding Overview}"/>
-                            </StackLayout>
-                        </ViewCell>
+                        <ImageCell ImageSource="{Binding CoverImage, Mode=TwoWay}"
+                                   Text="{Binding Title}"
+                                   Detail="{Binding Overview}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
